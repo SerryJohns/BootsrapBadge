@@ -3,7 +3,7 @@ import * as WidgetBase from "mxui/widget/_WidgetBase";
 import { createElement } from "react";
 import { render } from "react-dom";
 
-import { BadgeComponent, OnClickProps } from "./components/Badge";
+import { BadgeComponent, OnClickProps} from "./components/Badge";
 
 class BootstrapBadge extends WidgetBase {
     // Attributes from modeler

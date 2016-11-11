@@ -1,5 +1,6 @@
+import { ButtonBadgeItem } from "./BadgeButton";
+import { BadgeItem } from "./BadgeItem";
 import { createElement } from "react";
-import { DOM } from "react";
 
 export interface OnClickProps {
     microflow?: string;
@@ -43,18 +44,7 @@ export function BadgeComponent(props: BadgeProps) {
     }
 }
 
-export function BadgeItem(props: BadgeProps) {
-    return (
-        DOM.div({
-            className: "badge-link",
-            onClick: () => {
-                onClickMF(props);
-            }
-        }, DOM.span({ className: "badge-text" }, props.label),
-            DOM.span({ className: props.className }, props.val))
-    );
-}
-function onClickMF(props: BadgeProps) {
+export function onClickMF(props: BadgeProps) {
     return (
         mx.data.action({
             error: (error) => {
@@ -68,19 +58,4 @@ function onClickMF(props: BadgeProps) {
             }
         })
     );
-}
-
-export function ButtonBadgeItem(props: BadgeProps) {
-    return (
-        DOM.button({
-            className: props.className, itemType: "button",
-            onClick: () => {
-                    onClickMF(props);
-                }
-            },
-            DOM.span({ className: "badge-text" }, props.label),
-            DOM.span({ className: "badge" }, props.val)
-
-        )
-        );
 }
