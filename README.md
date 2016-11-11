@@ -20,4 +20,4 @@ However, badges can also be used along with buttons, as demonstrated with the bu
 ### Bugs, questions and issues
 
 Bugs and issues can be reported via the git hub issue tracker: 
-https://github.com/SerryJohns/BootstrapBadge/issues/
+https://github.com/SerryJohns/Badge/issues
