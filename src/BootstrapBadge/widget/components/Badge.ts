@@ -56,7 +56,7 @@ export function BadgeItem(props: BadgeProps) {
                         params: {
                             actionname: props.MicroflowProps.microflow,
                             applyto: "selection",
-                            guids: [props.MicroflowProps.guid]
+                            guids: [ props.MicroflowProps.guid ]
                         }
                     });
                 }
