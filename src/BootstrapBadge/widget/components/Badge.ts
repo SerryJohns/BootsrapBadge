@@ -17,6 +17,7 @@ export interface BadgeProps {
     className?: string;
     MicroflowProps?: OnClickProps;
     badgeType?: string;
+    // "btn" | "label" | "badge"
 }
 
 export function BadgeComponent(props: BadgeProps) {
@@ -47,22 +48,25 @@ export function BadgeItem(props: BadgeProps) {
         DOM.div({
             className: "badge-link",
             onClick: () => {
-                if (props.MicroflowProps.microflow !== "") {
-                    mx.data.action({
-                        error: (error) => {
-                            mx.ui.error(`Error while executing MicroFlow: 
-                    ${props.MicroflowProps.microflow}: ${error.message}`);
-                        },
-                        params: {
-                            actionname: props.MicroflowProps.microflow,
-                            applyto: "selection",
-                            guids: [ props.MicroflowProps.guid ]
-                        }
-                    });
-                }
+                onClickMF(props);
             }
         }, DOM.span({ className: "badge-text" }, props.label),
             DOM.span({ className: props.className }, props.val))
+    );
+}
+function onClickMF(props: BadgeProps) {
+    return (
+        mx.data.action({
+            error: (error) => {
+                mx.ui.error(`Error while executing MicroFlow: 
+                    ${props.MicroflowProps.microflow}: ${error.message}`);
+            },
+            params: {
+                actionname: props.MicroflowProps.microflow,
+                applyto: "selection",
+                guids: [ props.MicroflowProps.guid ]
+            }
+        })
     );
 }
 
@@ -71,23 +75,12 @@ export function ButtonBadgeItem(props: BadgeProps) {
         DOM.button({
             className: props.className, itemType: "button",
             onClick: () => {
-                if (props.MicroflowProps.microflow !== "") {
-                    mx.data.action({
-                        error: (error) => {
-                            mx.ui.error(`Error while executing MicroFlow: 
-                    ${props.MicroflowProps.microflow}: ${error.message}`);
-                        },
-                        params: {
-                            actionname: props.MicroflowProps.microflow,
-                            applyto: "selection",
-                            guids: [props.MicroflowProps.guid]
-                        }
-                    });
+                    onClickMF(props);
                 }
-            }
-        },
+            },
             DOM.span({ className: "badge-text" }, props.label),
             DOM.span({ className: "badge" }, props.val)
 
-        ));
+        )
+        );
 }

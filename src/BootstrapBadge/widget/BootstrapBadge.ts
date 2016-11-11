@@ -109,7 +109,7 @@ class BootstrapBadge extends WidgetBase {
 
 let dojoBootstrapBadge = dojoDeclare(
     "BootstrapBadge.widget.BootstrapBadge",
-    [WidgetBase],
+    [ WidgetBase ],
     (function (Source: any) {
         let result: any = {};
         for (let i in Source.prototype) {
