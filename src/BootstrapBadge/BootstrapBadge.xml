@@ -13,11 +13,6 @@
 			<category>Display</category>
 			<description>The label to display before the badge/label</description>
 		</property>
-		<property key="width" type="integer" defaultValue="250">
-			<caption>Width</caption>
-			<category>Display</category>
-			<description>The width in pixels of the widget. If 0 it will be 100%</description>
-		</property>
 		<property key="badgeType" type="enumeration" required="true" defaultValue="badge">
 			<caption>Type</caption>
 			<category>Display</category>
