@@ -17,7 +17,7 @@ However, badges can also be used along with buttons, as demonstrated with the bu
  * Color of the badge/label is based on the bootstrap classes; default, primary, success, info, warning and danger.
  * The bootstrap style and label attribute can be optional. However you can use them if you want you want to read the values directly from your entity object.
 
-### Bugs and questions
+### Bugs, questions and issues
 
 Bugs and issues can be reported via the git hub issue tracker: 
-https://github.com/SerryJohns/BootstrapBadge/issues/new
+https://github.com/SerryJohns/BootstrapBadge/issues/
