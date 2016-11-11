@@ -9,8 +9,8 @@ export function ButtonBadgeItem(props: BadgeProps) {
                     onClickMF(props);
                 }
             },
-            DOM.span({ className: "badge-text" }, props.label),
-            DOM.span({ className: "badge" }, props.val)
+            DOM.span({ className: "badge-badge-text" }, props.label),
+            DOM.span({ className: "badge" }, props.badgeValue)
 
         )
         );

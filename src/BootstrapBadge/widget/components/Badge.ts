@@ -13,7 +13,7 @@ export interface OnClickProps {
 
 export interface BadgeProps {
     label?: string;
-    val?: string;
+    badgeValue?: string;
     bootstrapStyle?: string;
     className?: string;
     MicroflowProps?: OnClickProps;
@@ -23,39 +23,34 @@ export interface BadgeProps {
 
 export function BadgeComponent(props: BadgeProps) {
     let badgeClass: string;
-    badgeClass = props.badgeType;
 
-    if (props.badgeType === "btn") {
-        badgeClass += " btn-" + props.bootstrapStyle;
-        return createElement(ButtonBadgeItem, {
-            className: badgeClass,
-            label: props.label,
-            val: props.val,
-            MicroflowProps: props.MicroflowProps
-        });
-    } else {
-        badgeClass += " label-" + props.bootstrapStyle;
-        return createElement(BadgeItem, {
-            className: badgeClass,
-            label: props.label,
-            val: props.val,
-            MicroflowProps: props.MicroflowProps
-        });
-    }
+    badgeClass = props.badgeType === "label" ? "label label-" + props.bootstrapStyle :
+        props.badgeType === "btn" ? "btn btn-" + props.bootstrapStyle : "badge label-" + props.bootstrapStyle;
+
+
+    return createElement(props.badgeType === "btn" ? ButtonBadgeItem : BadgeItem, {
+        MicroflowProps: props.MicroflowProps,
+        badgeValue: props.badgeValue,
+        className: badgeClass,
+        label: props.label
+    });
+
 }
 
 export function onClickMF(props: BadgeProps) {
-    return (
-        mx.data.action({
-            error: (error) => {
-                mx.ui.error(`Error while executing MicroFlow: 
+    if (props.MicroflowProps.microflow !== "") {
+        return (
+            mx.data.action({
+                error: (error) => {
+                    mx.ui.error(`Error while executing MicroFlow: 
                     ${props.MicroflowProps.microflow}: ${error.message}`);
-            },
-            params: {
-                actionname: props.MicroflowProps.microflow,
-                applyto: "selection",
-                guids: [ props.MicroflowProps.guid ]
-            }
-        })
-    );
+                },
+                params: {
+                    actionname: props.MicroflowProps.microflow,
+                    applyto: "selection",
+                    guids: [ props.MicroflowProps.guid ]
+                }
+            })
+        );
+    }
 }
