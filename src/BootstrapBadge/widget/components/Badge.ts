@@ -16,14 +16,14 @@ export interface BadgeProps {
     bootstrapStyle?: string;
     className?: string;
     MicroflowProps?: OnClickProps;
-    badgeTypeValue?: string;
+    badgeType?: string;
 }
 
 export function BadgeComponent(props: BadgeProps) {
     let badgeClass: string;
-    badgeClass = props.badgeTypeValue;
+    badgeClass = props.badgeType;
 
-    if (props.badgeTypeValue === "btn") {
+    if (props.badgeType === "btn") {
         badgeClass += " btn-" + props.bootstrapStyle;
         return createElement(ButtonBadgeItem, {
             className: badgeClass,

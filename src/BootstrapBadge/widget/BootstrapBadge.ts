@@ -6,98 +6,21 @@ import { render } from "react-dom";
 import { BadgeComponent, OnClickProps } from "./components/Badge";
 
 class BootstrapBadge extends WidgetBase {
-    private badgeAttribute: string;
-    private bootstrapStyleAttribute: string;
-    private labelAttribute: string;
+    // Attributes from modeler
+    private attrValue: string;
+    private attrStyle: string;
+    private attrLabel: string;
     private badgeType: string;
     private label: string;
     private badgeClass: string;
     private onclickMicroflow: string;
 
+    // internal variables
     private contextObject: mendix.lib.MxObject;
-    private handles: any[];
-    private value: string;
+    private handles: number[];
+    private badgeValue: string;
 
-    postCreate() {
-        this.handles = [];
-        this.updateRendering();
-    }
-
-    update(object: mendix.lib.MxObject, callback?: Function) {
-        this.contextObject = object;
-        this.updateRendering(callback);
-        this._resetSubscriptions();
-    }
-
-    private updateRendering(callback?: Function) {
-        let styleAttribute: string;
-        let labelAttribute: string;
-
-        if (this.contextObject) {
-            this.value = this.contextObject.get(this.badgeAttribute).toString();
-
-            if (this.contextObject.get(this.bootstrapStyleAttribute)) {
-                styleAttribute = this.contextObject.get(this.bootstrapStyleAttribute).toString();
-            } else {
-                styleAttribute = this.badgeClass;
-            }
-
-            if (this.contextObject.get(this.labelAttribute)) {
-                labelAttribute = this.contextObject.get(this.labelAttribute).toString();
-            } else {
-                labelAttribute = this.label;
-            }
-
-            render(createElement(BadgeComponent, {
-                badgeTypeValue: this.badgeType,
-                bootstrapStyle: styleAttribute,
-                label: labelAttribute,
-                MicroflowProps: this.createOnClickProps(),
-                val: this.value
-            }), this.domNode);
-        }
-
-        if (typeof callback === "function") {
-            callback();
-        }
-
-    }
-    private _unsubscribe() {
-        if (this.handles) {
-            for (let handle of this.handles) {
-                mx.data.unsubscribe(handle);
-            }
-            this.handles = [];
-        }
-    }
-    private _resetSubscriptions() {
-        this._unsubscribe();
-        if (this.contextObject) {
-            this.handles.push(mx.data.subscribe({
-                callback: (guid) => this.updateRendering(),
-                guid: this.contextObject.getGuid()
-            }));
-            this.handles.push(mx.data.subscribe({
-                attr: this.badgeAttribute,
-                callback: (guid, attr, attrValue) => this.updateRendering(),
-                guid: this.contextObject.getGuid()
-            }));
-
-            this.handles.push(mx.data.subscribe({
-                attr: this.bootstrapStyleAttribute,
-                callback: (guid, attr, attrValue) => this.updateRendering(),
-                guid: this.contextObject.getGuid()
-            }));
-
-            this.handles.push(mx.data.subscribe({
-                attr: this.labelAttribute,
-                callback: (guid, attr, attrValue) => this.updateRendering(),
-                guid: this.contextObject.getGuid()
-            }));
-        }
-    }
-
-    public createOnClickProps(): OnClickProps {
+    createOnClickProps(): OnClickProps {
         return (
             {
                 applyto: "selection",
@@ -106,6 +29,81 @@ class BootstrapBadge extends WidgetBase {
                 widgetId: this.id
             }
         );
+    }
+
+    postCreate() {
+        this.handles = [];
+        this.updateRendering();
+    }
+
+    update(object: mendix.lib.MxObject, callback?: Function) {
+        this.contextObject = object;
+        this.resetSubscriptions();
+        this.updateRendering();
+        callback();
+    }
+
+    unsubscribe() {
+        if (this.handles) {
+            for (let handle of this.handles) {
+                mx.data.unsubscribe(handle);
+            }
+            this.handles = [];
+        }
+    }
+
+    private updateRendering() {
+        let attrStyle = this.contextObject ?
+            this.getValue(this.contextObject.get(this.attrStyle) as string, this.badgeClass) : this.badgeClass;
+        let attrLabel = this.contextObject ?
+            this.getValue(this.contextObject.get(this.attrLabel) as string, this.label) : this.label;
+        this.badgeValue = this.contextObject ?
+            this.getValue(this.contextObject.get(this.attrValue) as string, "0") : "0";
+
+        render(createElement(BadgeComponent, {
+                badgeType: this.badgeType,
+                    bootstrapStyle: attrStyle,
+                    label: attrLabel,
+                    MicroflowProps: this.contextObject ? this.createOnClickProps() : "",
+                    val: this.badgeValue
+                }), this.domNode
+        );
+    }
+
+    private getValue(attr: string, otherValue: string) {
+        return attr ? attr : otherValue;
+    }
+
+    private resetSubscriptions() {
+        this.unsubscribe();
+
+        if (this.contextObject) {
+            this.handles.push( mx.data.subscribe({
+                callback: (guid) => this.updateRendering(),
+                guid: this.contextObject.getGuid()
+            })
+            );
+            this.handles.push( mx.data.subscribe({
+                attr: this.attrValue,
+                callback: ( guid, attr, badgeValue ) => this.updateRendering(),
+                guid: this.contextObject.getGuid()
+            })
+            );
+
+            this.handles.push ( mx.data.subscribe({
+                attr: this.attrStyle,
+                callback: ( guid, attr, badgeValue ) => this.updateRendering(),
+                guid: this.contextObject.getGuid()
+            })
+            );
+
+            this.handles.push( mx.data.subscribe ({
+                attr: this.attrLabel,
+                callback: ( guid, attr, badgeValue ) => this.updateRendering(),
+                guid: this.contextObject.getGuid()
+            })
+            );
+        }
     }
 }
 
@@ -120,4 +118,5 @@ let dojoBootstrapBadge = dojoDeclare(
             }
         }
         return result;
-    } (BootstrapBadge)));
+    } (BootstrapBadge))
+);
