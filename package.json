@@ -1,7 +1,7 @@
 {
   "name": "bootstrapbadge",
   "version": "0.1.0",
-  "description": "numerical indicators of how many items are associated with a link",
+  "description": "Numerical indicators of how many items are associated with a link",
   "directories": {
     "test": "test"
   },
@@ -10,11 +10,11 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/mendixlabs/badge"
   },
   "license": "Apache-2.0",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/mendixlabs/badge/issues"
   },
   "devDependencies": {
     "@types/big.js": "0.0.31",
@@ -44,6 +44,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.8.0",
     "mendix-client": "git+https://github.com/FlockOfBirds/Mendix-client-typing.git",
+    "react-addons-test-utils": "~15.3.2",
     "source-map-loader": "^0.1.5",
     "ts-loader": "^0.9.4",
     "tslint-eslint-rules": "^2.1.0",
@@ -52,8 +53,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
-    "react": "^15.3.2",
-    "react-bootstrap": "^0.30.5",
-    "react-dom": "^15.3.2"
+    "react": "~15.3.2",
+    "react-dom": "~15.3.2"
   }
 }

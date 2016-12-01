@@ -1,6 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.mendix.com/widget/1.0/" xmlns="http://www.mendix.com/widget/1.0/" elementFormDefault="qualified">
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.mendix.com/widget/1.0/"
+           xmlns="http://www.mendix.com/widget/1.0/"
+           elementFormDefault="qualified">
     <xs:element name="widget" type="widgetType" />
+
     <xs:complexType name="widgetType">
         <xs:sequence>
             <xs:element name="name" type="xs:string" />
@@ -12,11 +16,13 @@
         <xs:attribute name="needsEntityContext" type="xs:boolean" use="required" />
         <xs:attribute name="mobile" type="xs:boolean" default="false" />
     </xs:complexType>
+
     <xs:complexType name="propertiesType">
         <xs:sequence>
             <xs:element name="property" type="propertyType" minOccurs="1" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
+
     <xs:complexType name="propertyType">
         <xs:sequence>
             <xs:element name="caption" type="xs:string" />
@@ -41,6 +47,7 @@
         <xs:attribute name="required" type="xs:boolean" default="true" />
         <xs:attribute name="isDefault" type="xs:boolean" default="false" />
     </xs:complexType>
+
     <xs:simpleType name="propertyTypeType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="attribute" />
@@ -57,29 +64,32 @@
             <xs:enumeration value="translatableString" />
         </xs:restriction>
     </xs:simpleType>
+
     <xs:complexType name="attributeTypesType">
         <xs:sequence>
             <xs:element name="attributeType" type="attributeTypeType" minOccurs="1" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
+
     <xs:complexType name="attributeTypeType">
         <xs:attribute name="name" type="attributeTypeNameType" use="required" />
     </xs:complexType>
+
     <xs:simpleType name="attributeTypeNameType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="AutoNumber" />
             <xs:enumeration value="Binary" />
             <xs:enumeration value="Boolean" />
-            <xs:enumeration value="Currency" />
             <xs:enumeration value="DateTime" />
             <xs:enumeration value="Enum" />
-            <xs:enumeration value="Float" />
+            <xs:enumeration value="Decimal" />
             <xs:enumeration value="HashString" />
             <xs:enumeration value="Integer" />
             <xs:enumeration value="Long" />
             <xs:enumeration value="String" />
         </xs:restriction>
     </xs:simpleType>
+
     <xs:simpleType name="isPathType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="no" />
@@ -87,17 +97,20 @@
             <xs:enumeration value="yes" />
         </xs:restriction>
     </xs:simpleType>
+
     <xs:simpleType name="pathTypeType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="reference" />
             <xs:enumeration value="referenceSet" />
         </xs:restriction>
     </xs:simpleType>
+
     <xs:complexType name="enumerationValuesType">
         <xs:sequence>
             <xs:element name="enumerationValue" type="enumerationValueType" minOccurs="1" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
+
     <xs:complexType name="enumerationValueType">
         <xs:simpleContent>
             <xs:extension base="xs:string">
@@ -105,11 +118,13 @@
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
+
     <xs:complexType name="returnTypeType">
         <xs:attribute name="type" type="returnTypeTypeType" use="required" />
         <xs:attribute name="isList" type="xs:boolean" default="false" />
         <xs:attribute name="entityProperty" type="xs:string" />
     </xs:complexType>
+
     <xs:simpleType name="returnTypeTypeType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="Void" />
@@ -121,11 +136,13 @@
             <xs:enumeration value="Object" />
         </xs:restriction>
     </xs:simpleType>
+
     <xs:complexType name="translationsType">
         <xs:sequence>
             <xs:element name="translation" type="translationType" minOccurs="1" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
+
     <xs:complexType name="translationType">
         <xs:simpleContent>
             <xs:extension base="xs:string">

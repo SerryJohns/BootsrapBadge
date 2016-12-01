@@ -1,7 +1,2 @@
-dist/
 node_modules/
-.editorconfig
-*DS_Store*
-.vscode/
-*.bak
-*.gitignore
+dist/

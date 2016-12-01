@@ -1,5 +1,9 @@
-import { BadgeProps, onClickMF} from "./Badge";
 import { DOM } from "react";
+import { BadgeProps, onClickMF} from "./Badge";
+
+// Indents are wrong
+// make use of arrow function no need for return statement.
+// export const BadgeItem = (props: BadgeProps) =>
 
 export function BadgeItem(props: BadgeProps) {
     return (
