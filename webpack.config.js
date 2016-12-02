@@ -2,26 +2,26 @@ var webpack = require("webpack");
 var CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-    entry: "./src/BootstrapBadge/widget/BootstrapBadge.ts",
+    entry: "./src/com/mendix/widget/BootstrapBadge/BootstrapBadge.ts",
     output: {
         path: __dirname + "/dist/tmp",
-        filename: "src/BootstrapBadge/widget/BootstrapBadge.js",
+        filename: "src/com/mendix/widget/BootstrapBadge/BootstrapBadge.js",
         libraryTarget: "umd",
         umdNamedDefine: true,
-        library: "BootstrapBadge.widget.BootstrapBadge"
+        library: "com.mendix.widget.BootstrapBadge.BootstrapBadge"
     },
     resolve: {
-        extensions: [ "", ".ts", ".js", ".json" ]
+        extensions: ["", ".ts", ".js", ".json"]
     },
     errorDetails: true,
     module: {
         loaders: [
-            { test: /\.ts$/, loaders: [ "ts-loader" ] },
+            { test: /\.ts$/, loaders: ["ts-loader"] },
             { test: /\.json$/, loader: "json" }
         ]
     },
     devtool: "source-map",
-    externals: [ "mxui/widget/_WidgetBase", "dojo/_base/declare" ],
+    externals: ["mxui/widget/_WidgetBase", "dojo/_base/declare"],
     plugins: [
         new CopyWebpackPlugin([
             { from: "src/**/*.js" },
