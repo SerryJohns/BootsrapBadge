@@ -4,7 +4,7 @@ import * as WidgetBase from "mxui/widget/_WidgetBase";
 import { createElement } from "react";
 import { render } from "react-dom";
 
-import { BadgeComponent } from "./components/BadgeItem";
+import { BadgeComponent } from "./components/Badgelable";
 // tslint:disable-next-line:ordered-imports
 import { OnClickProps, BadgeType } from "./components/Badge";
 
