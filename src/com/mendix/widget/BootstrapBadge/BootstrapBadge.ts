@@ -1,18 +1,19 @@
 import * as dojoDeclare from "dojo/_base/declare";
 import * as WidgetBase from "mxui/widget/_WidgetBase";
+
 import { createElement } from "react";
 import { render } from "react-dom";
 
 import { BadgeComponent } from "./components/BadgeItem";
 // tslint:disable-next-line:ordered-imports
-import { OnClickProps } from "./components/Badge";
+import { OnClickProps, BadgeType } from "./components/Badge";
 
 class BootstrapBadge extends WidgetBase {
     // Attributes from modeler
     private attrValue: string;
     private attrStyle: string;
     private attrLabel: string;
-    private badgeType: string;
+    private badgeType: BadgeType;
     private label: string;
     private badgeClass: string;
     private onclickMicroflow: string;
