@@ -3,7 +3,9 @@ import * as WidgetBase from "mxui/widget/_WidgetBase";
 import { createElement } from "react";
 import { render } from "react-dom";
 
-import { BadgeComponent, OnClickProps} from "./components/Badge";
+import { BadgeComponent } from "./components/BadgeItem";
+// tslint:disable-next-line:ordered-imports
+import { OnClickProps } from "./components/Badge";
 
 class BootstrapBadge extends WidgetBase {
     // Attributes from modeler
@@ -107,9 +109,10 @@ class BootstrapBadge extends WidgetBase {
     }
 }
 
-let dojoBootstrapBadge = dojoDeclare(
+const dojoBootstrapBadge = dojoDeclare(
     "com.mendix.widget.BootstrapBadge.BootstrapBadge",
     [ WidgetBase ],
+    // tslint:disable-next-line:only-arrow-functions
     (function (Source: any) {
         let result: any = {};
         for (let i in Source.prototype) {
