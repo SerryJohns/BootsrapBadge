@@ -21,12 +21,12 @@ describe("A badge button", () => {
   });
 });
 
-describe("A badge label", () => {
-  it("contains spec with an expectation", () => {
-    // 
-  });
+// describe("A badge label", () => {
+//   it("contains spec with an expectation", () => {
+//     // 
+//   });
 
-  it("contains spec with an expectation", () => {
-    // 
-  });
-});
+//   it("contains spec with an expectation", () => {
+//     // 
+//   });
+// });
