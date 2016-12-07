@@ -2,8 +2,7 @@ import { shallow } from "enzyme";
 import { DOM, createElement } from "react";
 
 import { BadgeProps } from "../Badge";
-// tslint:disable-next-line:ordered-imports
-import { BadgeItem, BadgeComponent } from "../Badgelable";
+import { BadgeComponent, BadgeItem } from "../Badgelable";
 
 describe("A badge button", () => {
   const renderBadge = (props: BadgeProps) => shallow(createElement(BadgeComponent, props));

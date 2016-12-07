@@ -1,8 +1,8 @@
 import { createElement } from "react";
 import { DOM } from "react";
-// tslint:disable-next-line:ordered-imports
-import { ButtonBadgeItem } from "./BadgeButton";
+
 import { BadgeProps } from "./Badge";
+import { ButtonBadgeItem } from "./BadgeButton";
 
 export function BadgeComponent(props: BadgeProps) {
     // Tenary operator should use className
