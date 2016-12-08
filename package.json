@@ -1,18 +1,18 @@
 {
-  "name": "carousel",
+  "name": "badge",
   "version": "0.1.0",
-  "description": "Carousel",
+  "description": "Badge",
   "scripts": {
     "pretest": "tsc",
     "test": "karma start && node tests/remap.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mendixlabs/carousel"
+    "url": "https://github.com/SerryJohns/Badge"
   },
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/mendixlabs/carousel/issues"
+    "url": "https://github.com/SerryJohns/Badge/issues"
   },
   "devDependencies": {
     "@types/big.js": "0.0.31",
