@@ -1,14 +1,16 @@
-import { BadgeProps } from "./BadgeComponent";
 import { DOM } from "react";
 
-export const ButtonBadgeItem = (props: BadgeProps) =>
-    DOM.button(
+import { BadgeProps } from "./BadgeComponent";
+
+
+export const BadgeItem = (props: BadgeProps) =>
+    DOM.div(
         {
-            className: props.className,
+            className: "widget-badge-link",
             onClick: () => onClickMF(props)
         },
         DOM.span({ className: "widget-badge-text" }, props.label),
-        DOM.span({ className: "badge" }, props.badgeValue)
+        DOM.span({ className: props.className }, props.badgeValue)
     );
 
 const onClickMF = (props: BadgeProps) => {
@@ -16,7 +18,7 @@ const onClickMF = (props: BadgeProps) => {
         window.mx.data.action({
             error: (error: Error) => {
                 window.mx.ui.error(`Error while executing MicroFlow:
-                ${ props.MicroflowProps.microflow }: ${ error.message }`);
+                ${props.MicroflowProps.microflow}: ${error.message}`);
             },
             params: {
                 actionname: props.MicroflowProps.microflow,
