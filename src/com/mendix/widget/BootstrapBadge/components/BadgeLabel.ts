@@ -15,13 +15,12 @@ export const BadgeItem = (props: BadgeProps) =>
 
 const onClickMF = (props: BadgeProps) => {
     if (props.MicroflowProps && props.MicroflowProps.microflow && props.MicroflowProps.guid) {
-        window.mx.data.action({
+        window.mx.ui.action(props.MicroflowProps.microflow, {
             error: (error: Error) => {
                 window.mx.ui.error(`Error while executing MicroFlow:
                 ${props.MicroflowProps.microflow}: ${error.message}`);
             },
             params: {
-                actionname: props.MicroflowProps.microflow,
                 applyto: "selection",
                 guids: [ props.MicroflowProps.guid ]
             }
