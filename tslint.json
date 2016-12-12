@@ -23,6 +23,13 @@
         "no-unreachable": true,
         "no-unused-expression": true,
         "no-var-keyword": true,
+        "ordered-imports": [
+            true,
+            {
+                "import-sources-order": "any",
+                "named-imports-order": "lowercase-last"
+            }
+        ],
         "one-line": [
             true,
             "check-catch",
