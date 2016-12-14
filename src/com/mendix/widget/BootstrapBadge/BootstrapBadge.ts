@@ -51,7 +51,7 @@ class BootstrapBadge extends WidgetBase {
         render(createElement(BadgeComponent, {
             MicroflowProps: this.contextObject ? this.createOnClickProps() : "",
             badgeType: this.badgeType,
-            badgeValue: this.getValue(this.attrValue, "0"),
+            badgeValue: this.getValue(this.attrValue, ""),
             bootstrapStyle: this.getValue(this.attrStyle, this.badgeClass),
             label: this.getValue(this.attrLabel, this.label)
         }), this.domNode);

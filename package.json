@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "description": "Badge",
   "scripts": {
-    "pretest": "tsc",
-    "test": "karma start && node tests/remap.js"
+    "test": "karma start --single-run && node tests/remap.js"
   },
   "repository": {
     "type": "git",
@@ -53,6 +52,7 @@
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.1",
     "ts-loader": "^0.9.4",
+    "tslint": "^4.0.2",
     "tslint-eslint-rules": "^2.1.0",
     "typescript": "^2.0.3",
     "webpack": "^1.13.2",

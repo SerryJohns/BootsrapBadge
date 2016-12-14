@@ -1,13 +1,12 @@
-import { BadgeProps,onClickMF } from "./BadgeComponent";
+import { BadgeProps } from "./BadgeComponent";
 import { DOM, createElement } from "react";
-import { BadgeLabel } from "./BadgeLabel";
 
 export const BadgeButton = (props: BadgeProps) =>
-    DOM.button(
+    createElement(props.badgeType === "btn" ? "button" : "div",
         {
-            className: props.className,
-            onClick: () => onClickMF(props)
+            className: props.badgeType === "btn" ? props.className : "widget-badge-link",
+            onClick: () => props.onClick(props.MicroflowProps)
         },
         DOM.span({ className: "widget-badge-text" }, props.label),
-        DOM.span({ className: "badge" }, props.badgeValue)
+        DOM.span({ className: props.badgeType === "btn" ? "badge" : props.className }, props.badgeValue)
     );

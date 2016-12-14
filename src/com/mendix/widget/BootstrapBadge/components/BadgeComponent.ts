@@ -2,7 +2,6 @@ import * as classNames from "classnames";
 import { createElement } from "react";
 
 import { BadgeButton } from "./BadgeButton";
-import { BadgeLabel } from "./BadgeLabel";
 
 export interface OnClickProps {
     microflow?: string;
@@ -21,6 +20,7 @@ export interface BadgeProps {
     className?: string;
     MicroflowProps?: OnClickProps;
     badgeType?: BadgeType;
+    onClick?: (props: OnClickProps) => void;
 }
 
 export type BadgeType = "btn" | "label" | "badge";
@@ -33,24 +33,25 @@ const badgeClasses = (badgeType: BadgeType, bootstrapStyle: string) =>
         });
 
 export const BadgeComponent = (props: BadgeProps) =>
-    createElement(props.badgeType === "btn" ? BadgeButton : BadgeLabel, {
+    createElement(BadgeButton, {
         MicroflowProps: props.MicroflowProps,
+        badgeType: props.badgeType,
         badgeValue: props.badgeValue,
         className: badgeClasses(props.badgeType, props.bootstrapStyle),
-        label: props.label
+        label: props.label,
+        onClick: onClickMF
     });
 
-export const onClickMF = (props: BadgeProps) => {
-    if (props.MicroflowProps && props.MicroflowProps.microflow && props.MicroflowProps.guid) {
-        window.mx.data.action({
+export const onClickMF = (props: OnClickProps) => {
+    if (props.microflow && props.guid) {
+        window.mx.ui.action(props.microflow, {
             error: (error: Error) => {
                 window.mx.ui.error(`Error while executing MicroFlow:
-                ${ props.MicroflowProps.microflow }: ${ error.message }`);
+                ${props.microflow}: ${error.message}`);
             },
             params: {
-                actionname: props.MicroflowProps.microflow,
                 applyto: "selection",
-                guids: [ props.MicroflowProps.guid ]
+                guids: [ props.guid ]
             }
         });
     }
