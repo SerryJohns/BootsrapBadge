@@ -3,37 +3,17 @@ import { DOM, createElement } from "react";
 
 import { BadgeButton } from "../BadgeButton";
 import { BadgeComponent, BadgeProps, OnClickProps } from "../BadgeComponent";
+import { BadgeLabel } from "../BadgeLabel";
 
-describe("Badge button", () => {
+import { mockMendix } from "../../../../../../../tests/mocks/Mendix";
 
-   xit("should render structure", () => {
+describe("Badge", () => {
+
+    xit("should render structure", () => {
         // implement 
     });
 
     describe("data", () => {
-        xit("should be black  if style is not selected", () => {
-            // implement
-        });
-
-        xit("should be green  if style is success", () => {
-            // implement
-        });
-
-        xit("should be red  if style is danger", () => {
-            // implement
-        });
-
-        xit("should be orange  if style is warning", () => {
-            // implement
-        });
-
-        xit("should be light blue  if style is info", () => {
-            // implement
-        });
-
-        xit("should be blue  if style is primary", () => {
-            // implement
-        });
 
         xit("should render", () => {
             // implement 
@@ -51,14 +31,6 @@ describe("Badge button", () => {
 
         it("should not render if empty", () => {
             // implement 
-        });
-
-        xit("should be black  if style is not selected", () => {
-            // implement
-        });
-
-        xit("should be white  if style is green", () => {
-            // implement
         });
     });
 

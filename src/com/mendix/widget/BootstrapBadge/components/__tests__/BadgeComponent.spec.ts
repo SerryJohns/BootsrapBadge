@@ -1,30 +1,34 @@
 import { shallow } from "enzyme";
 import { DOM, createElement } from "react";
 
-import { ButtonBadgeItem } from "../BadgeButton";
+import { BadgeButton } from "../BadgeButton";
 import { BadgeComponent, BadgeProps, OnClickProps } from "../BadgeComponent";
-import { BadgeItem } from "../BadgeLabel";
+import { BadgeLabel } from "../BadgeLabel";
 
 describe("BadgeComponent", () => {
-           const badgeProps: BadgeProps = {
-               MicroflowProps: "",
-               badgeType: "btn",
-               badgeValue: "0",
-               bootstrapStyle: "default",
-               className: "widget-badge btn btn-default",
-               label: "default"
-           };
-
-            const shallowBadge = (props: BadgeProps) => (shallow(createElement(BadgeComponent, props)));
-        it("should render a button", () => {
-            const buttonwrapper = shallowBadge(badgeProps);
-            const button = buttonwrapper.find(ButtonBadgeItem);
-
-            expect(button.prop("badgeValue")).toBe("0");
-            expect(button.hasClass("badgeType")).toBe(false);
-            expect(button.hasClass("bootstrapStyle")).toBe(false);
-            expect(button.prop("className")).toBe("widget-badge btn btn-default");
-            expect(button.prop("label")).toBe("default");
+    describe("type", () => {
+        it("should be button if set type is button", () => {
+            // implement 
         });
+
+        it("should not be button if set type is not button", () => {
+            // implement 
+        });
+
+        it("should be label if set type is label", () => {
+            // implement 
+        });
+
+        it("should be not be label if set type is not label", () => {
+            // implement 
+        });
+        it("should be badge if set type is bage", () => {
+            // implement 
+        });
+
+        it("should be not be badge if set type is not badge", () => {
+            // implement 
+        });
+    });
 });
 
