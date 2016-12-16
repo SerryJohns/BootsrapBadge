@@ -41,12 +41,12 @@ module.exports = function(grunt) {
         copy: {
             distDeployment: {
                 files: [
-                    { dest: "./dist/MxTestProject/deployment/web/widgets", cwd: "./dist/tmp/src/", src: ["**/*"], expand: true }
+                    { dest: "./dist/MxTestProject/deployment/web/widgets", cwd: "./dist/tmp/src/", src: [ "**/*" ], expand: true }
                 ]
             },
             mpk: {
                 files: [
-                    { dest: "./dist/MxTestProject/widgets", cwd: "./dist/" + pkg.version + "/", src: [pkg.name + ".mpk"], expand: true }
+                    { dest: "./dist/MxTestProject/widgets", cwd: "./dist/" + pkg.version + "/", src: [ pkg.name + ".mpk" ], expand: true }
                 ]
             },
             source: {

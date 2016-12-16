@@ -7,9 +7,6 @@ export interface OnClickProps {
     microflow?: string;
     guid?: string;
     applyto?: string;
-    caller?: string;  // not used, should be used?
-    widgetId?: string; // not used
-    mxform?: string; // not used
     name?: string;
 }
 
@@ -39,7 +36,7 @@ export const BadgeComponent = (props: BadgeProps) =>
         badgeValue: props.badgeValue,
         className: badgeClasses(props.badgeType, props.bootstrapStyle),
         label: props.label,
-        onClick: onClickMF
+        onClick: onClickMF/*(onClickProps: OnClickProps) => onClickMF(onClickProps)*/
     });
 
 export const onClickMF = (props: OnClickProps) => {
