@@ -20,17 +20,17 @@ export interface BadgeProps {
 
 export type BadgeType = "btn" | "label" | "badge";
 
-const badgeClasses = (badgeType: BadgeType, bootstrapStyle: string, MFName: string) => {
+const badgeClasses = (badgeType: BadgeType, bootstrapStyle: string, MicroflowProps: OnClickProps) => {
     const badgeClass = classNames( "widget-badge", {
-            [`label label-${bootstrapStyle} widget-badge-display`] : badgeType === "label",
+            [`label label-${bootstrapStyle}`] : badgeType === "label",
             [`btn btn-${bootstrapStyle}`] : badgeType === "btn",
-            [`badge label-${bootstrapStyle} widget-badge-display`] : badgeType === "badge"
+            [`badge label-${bootstrapStyle}`] : badgeType === "badge"
         });
     const parentClasses = classNames({
             [`${badgeClass}`]: badgeType === "btn",
             [`widget-badge-display`]: badgeType !== "btn"
         },
-        { ["widget-badge-link"]: (badgeType !== "btn" && MFName && MFName.trim().length > 0) }
+        { ["widget-badge-link"]: (badgeType !== "btn" && MicroflowProps && MicroflowProps.microflow.trim().length > 0) }
     );
     const childClasses = badgeType === "btn" ? "badge" : badgeClass;
 
@@ -38,7 +38,7 @@ const badgeClasses = (badgeType: BadgeType, bootstrapStyle: string, MFName: stri
 };
 
 export const BadgeComponent = (props: BadgeProps) => {
-    const componentClasses = badgeClasses(props.badgeType, props.bootstrapStyle,props.MicroflowProps.microflow);
+    const componentClasses = badgeClasses(props.badgeType, props.bootstrapStyle, props.MicroflowProps);
     return createElement(props.badgeType === "btn" ? "button" : "div",
         {
             className: componentClasses.parentClasses,

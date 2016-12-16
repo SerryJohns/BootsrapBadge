@@ -3,12 +3,10 @@ import { DOM, createElement } from "react";
 
 import { BadgeButton } from "../BadgeButton";
 import { BadgeComponent, BadgeProps, OnClickProps } from "../BadgeComponent";
-import { BadgeLabel } from "../BadgeLabel";
 
 import { mockMendix } from "../../../../../../../tests/mocks/Mendix";
 
-describe("BadgeComponent", () => {
-
+describe("BadgeComponent", () => {
     beforeAll(() => {
         window.mx = mockMendix;
     });
@@ -19,48 +17,44 @@ describe("BadgeComponent", () => {
         badgeValue: "0",
         bootstrapStyle: "success",
         label: "Custom label",
-        onClick: jasmine.any(Function) as any
+        onClick: jasmine.createSpy("X")
     };
 
     describe("of type button", () => {
         let badgeButtonProps: BadgeProps = {
             badgeType: "btn",
             badgeValue: badgeProps.badgeValue,
-            className: "widget-badge",
+            bootstrapStyle: "success",
             label: badgeProps.label,
-            onClick: jasmine.any(Function) as any
+            onClick: jasmine.createSpy("X")
         };
         const badgeComponent = createBadge(badgeButtonProps);
         it("should render the structure", () => {
-            badgeProps.badgeType = "btn";
-            expect(badgeComponent).toBeElement(createElement(BadgeButton, badgeButtonProps));
+            expect(badgeComponent).toBeElement(createElement("button", badgeButtonProps));
         });
 
         describe("and style success", () => {
             it("should have class widget-badge btn btn-success", () => {
-                expect(badgeComponent.hasClass("widget-badge")).toBe(true);
+                expect(badgeComponent.hasClass("widget-badge btn btn-success")).toBe(true);
             });
         });
     });
 
     describe("of type label", () => {
+        let props: BadgeProps = {
+            badgeType: "label",
+            badgeValue: badgeProps.badgeValue,
+            bootstrapStyle: "success",
+            onClick: jasmine.any(Function) as any
+        };
+        const badgeComponent = createBadge(props);
         it("should render the structure", () => {
-            badgeProps.badgeType = "label";
-            const badgeComponent = createBadge(badgeProps);
-            let badgeButtonProps: BadgeProps = {
-                badgeType: "label",
-                badgeValue: badgeProps.badgeValue,
-                className: "widget-badge label label",
-                label: badgeProps.label,
-                onClick: jasmine.any(Function) as any
-            };
-            expect(badgeComponent).toBeElement(createElement(BadgeButton, badgeButtonProps));
+            expect(badgeComponent).toBeElement(createElement(BadgeComponent, props));
         });
 
         describe("and style success", () => {
             it("should have class widget-badge btn label-success", () => {
-                const badgeComponent = createBadge(badgeProps);
-                expect(badgeComponent.hasClass("widget-badge")).toBe(true);
+                expect(badgeComponent.childAt(1).hasClass("widget-badge label label-success")).toBe(true);
             });
         });
     });
@@ -92,7 +86,7 @@ describe("BadgeComponent", () => {
                 error: jasmine.any(Function), params: {
                     actionname: onClickProps.name,
                     applyto: "selection",
-                    guids: [ onClickProps.guid ]
+                    guids: [onClickProps.guid]
                 }
             });
         });
