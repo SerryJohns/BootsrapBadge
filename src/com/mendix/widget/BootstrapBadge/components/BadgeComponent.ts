@@ -1,7 +1,5 @@
 import * as classNames from "classnames";
-import { createElement } from "react";
-
-import { BadgeButton } from "./BadgeButton";
+import { DOM, createElement } from "react";
 
 export interface OnClickProps {
     microflow?: string;
@@ -22,22 +20,34 @@ export interface BadgeProps {
 
 export type BadgeType = "btn" | "label" | "badge";
 
-const badgeClasses = (badgeType: BadgeType, bootstrapStyle: string) =>
-        classNames( "widget-badge", {
-            [`label label-${bootstrapStyle}`] : badgeType === "label",
+const badgeClasses = (badgeType: BadgeType, bootstrapStyle: string, MFName: string) => {
+    const badgeClass = classNames( "widget-badge", {
+            [`label label-${bootstrapStyle} widget-badge-display`] : badgeType === "label",
             [`btn btn-${bootstrapStyle}`] : badgeType === "btn",
-            [`badge label-${bootstrapStyle}`] : badgeType === "badge"
+            [`badge label-${bootstrapStyle} widget-badge-display`] : badgeType === "badge"
         });
+    const parentClasses = classNames({
+            [`${badgeClass}`]: badgeType === "btn",
+            [`widget-badge-display`]: badgeType !== "btn"
+        },
+        { ["widget-badge-link"]: (badgeType !== "btn" && MFName && MFName.trim().length > 0) }
+    );
+    const childClasses = badgeType === "btn" ? "badge" : badgeClass;
 
-export const BadgeComponent = (props: BadgeProps) =>
-    createElement(BadgeButton, {
-        MicroflowProps: props.MicroflowProps,
-        badgeType: props.badgeType,
-        badgeValue: props.badgeValue,
-        className: badgeClasses(props.badgeType, props.bootstrapStyle),
-        label: props.label,
-        onClick: onClickMF/*(onClickProps: OnClickProps) => onClickMF(onClickProps)*/
-    });
+    return { parentClasses, childClasses };
+};
+
+export const BadgeComponent = (props: BadgeProps) => {
+    const componentClasses = badgeClasses(props.badgeType, props.bootstrapStyle,props.MicroflowProps.microflow);
+    return createElement(props.badgeType === "btn" ? "button" : "div",
+        {
+            className: componentClasses.parentClasses,
+            onClick: () => onClickMF(props.MicroflowProps)
+        },
+        DOM.span({ className: "widget-badge-text" }, props.label),
+        DOM.span({ className: componentClasses.childClasses }, props.badgeValue)
+    );
+};
 
 export const onClickMF = (props: OnClickProps) => {
     if (props.microflow && props.guid) {

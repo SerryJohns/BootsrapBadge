@@ -5,5 +5,7 @@
 
 .widget-badge-link {
     cursor: pointer;
-    display: inline block;
+}
+.widget-badge-display {
+    display: inline-block;
 }
