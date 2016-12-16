@@ -7,7 +7,7 @@ import { BadgeLabel } from "../BadgeLabel";
 
 import { mockMendix } from "../../../../../../../tests/mocks/Mendix";
 
-describe("BadgeComponent", () => {
+describe("BadgeComponent", () => {
 
     beforeAll(() => {
         window.mx = mockMendix;
