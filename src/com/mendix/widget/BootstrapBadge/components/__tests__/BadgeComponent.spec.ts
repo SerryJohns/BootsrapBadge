@@ -6,35 +6,33 @@ import { BadgeComponent, BadgeProps, OnClickProps } from "../BadgeComponent";
 import { mockMendix } from "../../../../../../../tests/mocks/Mendix";
 
 describe("BadgeComponent", () => {
+    let badgeProps: BadgeProps;
     beforeAll(() => {
         window.mx = mockMendix;
+    });
+    beforeEach(() => {
+        badgeProps = {
+            MicroflowProps: {
+                applyto: "selection",
+                guid: "2",
+                microflow: "IVK_Onclick"
+            },
+            badgeValue: "0",
+            bootstrapStyle: "default",
+            label: "default"
+        };
     });
 
     const defaultMx = window.mx;
     const createBadge = (props: BadgeProps) => shallow(createElement(BadgeComponent, props));
-    // TODO: Use typescript assignment techniques while assigning the global props to props within a nested describe.
-    const badgeProps: BadgeProps = {
-        MicroflowProps: {
-            applyto: "selection",
-            guid: "2",
-            microflow: "IVK_Onclick"
-        },
-        badgeValue: "0",
-        bootstrapStyle: "default",
-        label: "default"
-    };
 
     describe("of type button", () => {
-        const props: BadgeProps = {
-            MicroflowProps: badgeProps.MicroflowProps,
-            badgeType: "btn",
-            badgeValue: badgeProps.badgeValue,
-            bootstrapStyle: badgeProps.bootstrapStyle,
-            label: badgeProps.label
-        };
-        const badgeComponent = createBadge(props);
+        beforeEach(() => {
+            badgeProps.badgeType = "btn";
+        });
 
         it("should render the structure", () => {
+            const badgeComponent = createBadge(badgeProps);
             expect(badgeComponent).toBeElement(
                 DOM.button(
                     {
@@ -47,35 +45,31 @@ describe("BadgeComponent", () => {
             );
         });
 
+        it("with style 'success' should have class 'widget-badge btn btn-success'", () => {
+            badgeProps.bootstrapStyle = "success";
+            const badgebutton = createBadge(badgeProps);
+            expect(badgebutton.hasClass("widget-badge btn btn-success")).toBe(true);
+        });
+
         it("should respond to click event", () => {
             spyOn(window.mx.ui, "action").and.callThrough();
-            const badgebutton = createBadge(props);
+            const badgebutton = createBadge(badgeProps);
 
             badgebutton.simulate("click");
 
             expect(window.mx.ui.action).toHaveBeenCalled();
         });
-        describe("and style success", () => {
-            let newProps = props;
-            newProps.bootstrapStyle = "success";
-            const badgeComponent_ = createBadge(newProps);
-            it("should have class widget-badge btn btn-success", () => {
-                expect(badgeComponent_.hasClass("widget-badge btn btn-success")).toBe(true);
-            });
-        });
 
     });
 
     describe("of type badge", () => {
-        const props: BadgeProps = {
-            MicroflowProps: badgeProps.MicroflowProps,
-            badgeType: "badge",
-            badgeValue: badgeProps.badgeValue,
-            bootstrapStyle: badgeProps.bootstrapStyle,
-            label: badgeProps.label
-        };
-        const badgeComponent = createBadge(props);
+        beforeEach(() => {
+            badgeProps.badgeType = "badge";
+        });
+
         it("should render the structure", () => {
+            const badgeComponent = createBadge(badgeProps);
+
             expect(badgeComponent).toBeElement(
                 DOM.div(
                     {
@@ -88,108 +82,83 @@ describe("BadgeComponent", () => {
             );
         });
 
+        it("with style 'success' should have class 'widget-badge badge label-success'", () => {
+            badgeProps.bootstrapStyle = "success";
+            const badgeComponent = createBadge(badgeProps);
+            expect(badgeComponent.childAt(1).hasClass("widget-badge badge label-success")).toBe(true);
+        });
+
         it("should respond to click event", () => {
             spyOn(window.mx.ui, "action").and.callThrough();
-            const badgebutton = createBadge(props);
+            const badgeComponent = createBadge(badgeProps);
 
-            badgebutton.simulate("click");
+            badgeComponent.simulate("click");
 
             expect(window.mx.ui.action).toHaveBeenCalled();
         });
 
-        describe("and style success", () => {
-            it("should have class widget-badge badge label-success", () => {
-                let newProps = props;
-                newProps.bootstrapStyle = "success";
-                const badgeComponent_ = createBadge(newProps);
-                expect(badgeComponent_.childAt(1).hasClass("widget-badge badge label-success")).toBe(true);
-            });
-        });
     });
 
     describe("of type label", () => {
-        const props: BadgeProps = {
-            MicroflowProps: badgeProps.MicroflowProps,
-            badgeType: "label",
-            badgeValue: "0",
-            bootstrapStyle: "default"
-        };
-        const badgeComponent = createBadge(props);
+        beforeEach(() => {
+            badgeProps.badgeType = "label";
+        });
+
         it("should render the structure", () => {
+            const badgeComponent = createBadge(badgeProps);
             expect(badgeComponent).toBeElement(
                 DOM.div(
                     {
                         className: "widget-badge-display",
                         onClick: jasmine.any(Function) as any
                     },
-                    DOM.span({ className: "widget-badge-text" }, props.label),
-                    DOM.span({ className: "widget-badge label label-default" }, props.badgeValue)
+                    DOM.span({ className: "widget-badge-text" }, badgeProps.label),
+                    DOM.span({ className: "widget-badge label label-default" }, badgeProps.badgeValue)
                 )
             );
         });
 
+        it("with style 'success' should have class 'widget-badge label label-success'", () => {
+            badgeProps.bootstrapStyle = "success";
+            const badgeComponent = createBadge(badgeProps);
+            expect(badgeComponent.childAt(1).hasClass("widget-badge label label-success")).toBe(true);
+        });
+
         it("should respond to click event", () => {
             spyOn(window.mx.ui, "action").and.callThrough();
-            const badgebutton = createBadge(props);
+            const badgeComponent = createBadge(badgeProps);
 
-            badgebutton.simulate("click");
+            badgeComponent.simulate("click");
 
             expect(window.mx.ui.action).toHaveBeenCalled();
         });
 
-        describe("and style success", () => {
-            it("should have class widget-badge label label-success", () => {
-                let newProps = props;
-                newProps.bootstrapStyle = "success";
-                const badgeComponent_ = createBadge(newProps);
-                expect(badgeComponent_.childAt(1).hasClass("widget-badge label label-success")).toBe(true);
-            });
-        });
     });
 
     describe("with an onClick microflow", () => {
         it("executes the microflow when a badge / label item is clicked", () => {
-            const badgeOnclickProps: BadgeProps = {
-                MicroflowProps: {
-                    applyto: "selection",
-                    guid: "2",
-                    microflow: ""
-                }
-            };
-            const ClickProps: OnClickProps = {
-                applyto: "selection",
-                guid: "2"
-            };
             spyOn(window.mx.ui, "action").and.callThrough();
-            const badgeComponent = createBadge(badgeOnclickProps);
+            const badgeComponent = createBadge(badgeProps);
 
             badgeComponent.simulate("click");
 
-            expect(window.mx.ui.action).toHaveBeenCalledWith({
+            expect(window.mx.ui.action).toHaveBeenCalledWith(badgeProps.MicroflowProps.microflow, {
                 error: jasmine.any(Function),
                 params: {
                     applyto: "selection",
-                    guids: [ ClickProps.guid ]
+                    guids: [ badgeProps.MicroflowProps.guid ]
                 }
             });
         });
     });
 
     describe("without an onClick microflow", () => {
-        const props: BadgeProps = {
-            MicroflowProps: {
-                applyto: "selection",
-                guid: "2",
-                microflow: ""
-            },
-            badgeType: "badge",
-            badgeValue: badgeProps.badgeValue,
-            bootstrapStyle: badgeProps.bootstrapStyle,
-            label: badgeProps.label
-        };
+
         it("does not respond when a badge / label item is clicked", () => {
+            badgeProps.MicroflowProps.microflow = "";
             spyOn(window.mx.ui, "action").and.callThrough();
-            const badgeComponent = createBadge(props);
+
+            const badgeComponent = createBadge(badgeProps);
             badgeComponent.simulate("click");
 
             expect(window.mx.ui.action).not.toHaveBeenCalled();
