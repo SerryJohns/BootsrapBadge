@@ -5,14 +5,12 @@ export interface OnClickProps {
     microflow?: string;
     guid?: string;
     applyto?: string;
-    name?: string;
 }
 
 export interface BadgeProps {
     label?: string;
     badgeValue?: string;
     bootstrapStyle?: string;
-    className?: string;
     MicroflowProps?: OnClickProps;
     badgeType?: BadgeType;
     onClick?: (props: OnClickProps) => void;
@@ -21,15 +19,15 @@ export interface BadgeProps {
 export type BadgeType = "btn" | "label" | "badge";
 
 const badgeClasses = (badgeType: BadgeType, bootstrapStyle: string, MicroflowProps: OnClickProps) => {
-    const badgeClass = classNames( "widget-badge", {
-            [`label label-${bootstrapStyle}`] : badgeType === "label",
-            [`btn btn-${bootstrapStyle}`] : badgeType === "btn",
-            [`badge label-${bootstrapStyle}`] : badgeType === "badge"
-        });
+    const badgeClass = classNames("widget-badge", {
+        [`label label-${bootstrapStyle}`]: badgeType === "label",
+        [`btn btn-${bootstrapStyle}`]: badgeType === "btn",
+        [`badge label-${bootstrapStyle}`]: badgeType === "badge"
+    });
     const parentClasses = classNames({
-            [`${badgeClass}`]: badgeType === "btn",
-            [`widget-badge-display`]: badgeType !== "btn"
-        },
+        [`${badgeClass}`]: badgeType === "btn",
+        [`widget-badge-display`]: badgeType !== "btn"
+    },
         { ["widget-badge-link"]: (badgeType !== "btn" && MicroflowProps && MicroflowProps.microflow.trim().length > 0) }
     );
     const childClasses = badgeType === "btn" ? "badge" : badgeClass;
