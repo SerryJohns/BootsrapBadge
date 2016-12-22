@@ -19,27 +19,6 @@ class BootstrapBadge extends WidgetBase {
     private contextObject: mendix.lib.MxObject;
     private handles: number[];
 
-    onClickProps(): OnClickProps {
-        return ({
-            applyto: "selection",
-            guid: this.contextObject ? this.contextObject.getGuid() : "",
-            microflow: this.onclickMicroflow
-        });
-    }
-
-    onClickMF (props: OnClickProps) {
-        if (props.microflow && props.guid) {
-            window.mx.ui.action(props.microflow, {
-                error: (error: Error) =>
-                    window.mx.ui.error(`Error while executing MicroFlow: ${props.microflow}: ${error.message}`),
-                params: {
-                    applyto: "selection",
-                    guids: [ props.guid ]
-                }
-            });
-        }
-    }
-
     postCreate() {
         this.handles = [];
         this.updateRendering();
@@ -61,9 +40,9 @@ class BootstrapBadge extends WidgetBase {
 
     private updateRendering() {
         const BadgeElement = this.badgeType === "btn"
-        ? BadgeButton
-        : this.badgeType === "label"
-            ? BadgeLabel : Badge;
+            ? BadgeButton
+            : this.badgeType === "label"
+                ? BadgeLabel : Badge;
 
         const clickParams = {
                 applyto: "selection",
@@ -86,6 +65,26 @@ class BootstrapBadge extends WidgetBase {
             return this.contextObject.get(attributeName) as string || defaultValue;
         }
         return defaultValue;
+    }
+    private onClickProps(): OnClickProps {
+        return ({
+            applyto: "selection",
+            guid: this.contextObject ? this.contextObject.getGuid() : "",
+            microflow: this.onclickMicroflow
+        });
+    }
+
+    private onClickMF (props: OnClickProps) {
+        if (props.microflow && props.guid) {
+            window.mx.ui.action(props.microflow, {
+                error: (error: Error) =>
+                    window.mx.ui.error(`Error while executing MicroFlow: ${props.microflow}: ${error.message}`),
+                params: {
+                    applyto: "selection",
+                    guids: [ props.guid ]
+                }
+            });
+        }
     }
 
     private resetSubscriptions() {

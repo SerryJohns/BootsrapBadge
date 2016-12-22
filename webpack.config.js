@@ -3,13 +3,13 @@ var path = require("path");
 var CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-    entry: "./src/com/mendix/widget/BootstrapBadge/BootstrapBadge.ts",
+    entry: "./src/com/mendix/widget/badge/Badge.ts",
     output: {
         path: __dirname + "/dist/tmp",
-        filename: "src/com/mendix/widget/BootstrapBadge/BootstrapBadge.js",
+        filename: "src/com/mendix/widget/badge/Badge.js",
         libraryTarget: "umd",
         umdNamedDefine: true,
-        library: "com.mendix.widget.BootstrapBadge.BootstrapBadge"
+        library: "com.mendix.widget.badge.Badge"
     },
     resolve: {
         extensions: ["", ".ts", ".js", ".json"]
